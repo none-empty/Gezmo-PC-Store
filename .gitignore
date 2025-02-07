@@ -1,7 +1,7 @@
 # Build Folders
 bin/
 obj/
-
+Properties/
 # Rider-specific
 .idea/
 
@@ -20,7 +20,7 @@ packages/
 # Configuration Secrets
 appsettings.Development.json
 appsettings.*.json
-
+appsettings.json
 # Publish Output
 publish/
 
