@@ -15,7 +15,7 @@ public class HomeController : BaseController
         _logger = logger;
     }
 
-    public  GlobalModels InitializeGlobals()
+    private  GlobalModels InitializeGlobals()
     {
        return new GlobalModels{LoggedIn = false}; 
     }
