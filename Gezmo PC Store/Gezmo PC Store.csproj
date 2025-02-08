@@ -13,8 +13,4 @@
       <PackageReference Include="popper.js" Version="1.16.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="DataBaseModels\" />
-    </ItemGroup>
-
 </Project>
