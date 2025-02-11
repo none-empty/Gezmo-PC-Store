@@ -4,8 +4,38 @@ namespace Gezmo_PC_Store.Services;
 
 public class DataProvider:IDataProvider
 {
-    public async Task<List<Product>> GetProducts<T1,T2>(int start, int end,Func<Product,T1>?filter=null,Func<Product,T2>?comparer=null)
+    public async Task<List<Product>> GetProductsAsync(int start, int quantity)
     {
-       return await this.FetchProductsAsync(start, end,filter,comparer);
+        List<Product> products = new List<Product>();
+        await using (var context = new StoreDbContext())
+        {
+         products=context.Products.Skip(start).Take(quantity).ToList();   
+        }
+       return products;
+    }
+
+    public async Task<List<Product>> GetMostRecentAsync(int start, int quantity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<Product>> GetBestSellerAsync(int start, int quantity)
+    {
+        List<Product> products = new List<Product>();
+        await using (var context = new StoreDbContext())
+        {
+            products=context.Products.OrderByDescending(e=>e.Sold).Skip(start).Take(quantity).ToList();   
+        }
+        return products;
+    }
+
+    public async Task<List<Product>> GetByCategoryAsync(int start, int quantity, string category)
+    {
+        List<Product> products = new List<Product>();
+        await using (var context = new StoreDbContext())
+        {
+            products=context.Products.Where(e =>  e.Category.Name == category).Skip(start).Take(quantity).ToList();   
+        }
+        return products;
     }
 }

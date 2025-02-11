@@ -4,7 +4,7 @@ namespace Gezmo_PC_Store.Controllers.Store_Controllers;
 
 public class LoginRegisterController:BaseController
 {
-    public LoginRegisterController(IGlobalsHelper globalsHelper) : base(globalsHelper) { }
+    public LoginRegisterController(IGlobalsHelper globalsHelper,IDataProvider dataProvider) : base(globalsHelper,dataProvider) { }
     public IActionResult Login()
     {
         return View();

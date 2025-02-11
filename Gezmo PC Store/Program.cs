@@ -13,6 +13,7 @@ builder.Services.AddDbContext<StoreDbContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddScoped<IGlobalsHelper,GlobalsHelper>();
+builder.Services.AddScoped<IDataProvider, DataProvider>();
 var app = builder.Build();
 app.UseSession();
 // Configure the HTTP request pipeline.

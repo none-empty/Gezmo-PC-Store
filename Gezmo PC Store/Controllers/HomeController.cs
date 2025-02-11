@@ -10,7 +10,7 @@ public class HomeController : BaseController
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(IGlobalsHelper globalsHelper, ILogger<HomeController> logger) : base(globalsHelper)
+    public HomeController(IGlobalsHelper globalsHelper, ILogger<HomeController> logger,IDataProvider dataProvider) : base(globalsHelper,dataProvider)
     {
         _logger = logger;
     }
