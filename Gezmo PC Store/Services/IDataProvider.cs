@@ -4,6 +4,9 @@ namespace Gezmo_PC_Store.Services;
 
 public interface IDataProvider
 {
-    public Task<List<Product>> GetProducts<T1,T2>(int start,int end,Func<Product,T1>?filter=null,Func<Product,T2>?comparer=null);
+    public Task<List<Product>> GetProductsAsync(int start,int quantity);
+    public Task<List<Product>> GetMostRecentAsync(int start,int quantity);
+    public Task<List<Product>> GetBestSellerAsync(int start,int quantity);
+    public Task<List<Product>> GetByCategoryAsync(int start,int quantity,string category);
      
 }
