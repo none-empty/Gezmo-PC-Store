@@ -8,5 +8,4 @@ public class DataProvider:IDataProvider
     {
        return await this.FetchProductsAsync(start, end,filter,comparer);
     }
-
 }

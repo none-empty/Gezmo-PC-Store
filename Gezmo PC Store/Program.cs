@@ -1,8 +1,15 @@
-using Gezmo_PC_Store.Services;;
+using Gezmo_PC_Store.DataBaseModels;
+using Gezmo_PC_Store.Services;
+using Microsoft.EntityFrameworkCore;
+
+;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Configuration.AddUserSecrets<Program>();
+builder.Services.AddDbContext<StoreDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddScoped<IGlobalsHelper,GlobalsHelper>();
@@ -28,3 +35,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+ 

@@ -6,11 +6,19 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Gezmo_PC_Store</RootNamespace>
         <EnableDefaultStaticFiles>true</EnableDefaultStaticFiles>
+        <UserSecretsId>dcd9725a-47d5-46e4-8d3a-f4882013df84</UserSecretsId>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.12" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="popper.js" Version="1.16.1" />
     </ItemGroup>
-
+    
 </Project>
