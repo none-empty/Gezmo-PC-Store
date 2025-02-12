@@ -103,6 +103,8 @@ public partial class StoreDbContext : DbContext
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("has_category");
+            entity.Property(e => e.InsertionDate)
+                .HasDefaultValueSql("GETDATE()");
         });
 
         modelBuilder.Entity<User>(entity =>

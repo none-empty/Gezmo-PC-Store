@@ -19,8 +19,8 @@ public partial class Product
 
     public string? ImageUrl { get; set; }
 
-    public int? Sold { get; set; }
-
+    public int? Sold { get; set; } = 0;
+    public DateTime? InsertionDate { get; set; }
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();

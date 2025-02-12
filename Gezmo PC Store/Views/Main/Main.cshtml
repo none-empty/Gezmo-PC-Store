@@ -94,7 +94,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                 @for (int i = 0; i < 8; ++i)
+                 @foreach(var prod in @Model.BestSeller)
                  {
                      <div class="col mb-5">
                          <div class="card h-100">
@@ -104,9 +104,9 @@
                              <div class="card-body p-4">
                                  <div class="text-center">
                                      <!-- Product name-->
-                                     <h5 class="fw-bolder">Fancy Product</h5>
+                                     <h5 class="fw-bolder">@prod.Name</h5>
                                      <!-- Product price-->
-                                     $40.00 - $80.00
+                                     @prod.Price
                                  </div>
                              </div>
                              <!-- Product actions-->
@@ -119,8 +119,64 @@
                 </div>
             </div>
         </section>
-        <div class ="ss" style="background-color:orange; margin-bottom:100px; padding: 20px"><a href="#!" style="text-decoration: none"><h1 style="color:whitesmoke">New Arrivals</h1></a></div>
-        <div class ="ss" style="background-color:orange; margin-bottom:100px; padding: 20px"><a href="#!" style="text-decoration: none"><h1 style="color:whitesmoke">All Items</h1></a></div>
+        <div class ="ss" style="background-color:orange; margin-bottom:0px; padding: 20px"><a href="#!" style="text-decoration: none"><h1 style="color:whitesmoke">New Arrivals</h1></a></div>
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @foreach(var prod in @Model.AllProducts)
+                    {
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="/desktop-wallpaper-pc-hardware-pc-hardware-thumbnail.jpg" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">@prod.Name</h5>
+                                        <!-- Product price-->
+                                        @prod.Price
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Product Details</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <div class ="ss" style="background-color:orange; margin-bottom:0px; padding: 20px"><a href="#!" style="text-decoration: none"><h1 style="color:whitesmoke">All Items</h1></a></div>
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @foreach(var prod in @Model.AllProducts)
+                    {
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="/desktop-wallpaper-pc-hardware-pc-hardware-thumbnail.jpg" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">@prod.Name</h5>
+                                        <!-- Product price-->
+                                        @prod.Price
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Product Details</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Gezmo PC Store @DateTime.Now.Year.ToString()</p></div>
         </footer>

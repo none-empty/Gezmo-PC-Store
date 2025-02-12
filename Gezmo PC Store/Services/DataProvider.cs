@@ -7,16 +7,26 @@ public class DataProvider:IDataProvider
     public async Task<List<Product>> GetProductsAsync(int start, int quantity)
     {
         List<Product> products = new List<Product>();
-        await using (var context = new StoreDbContext())
+         await using (var context = new StoreDbContext())
         {
-         products=context.Products.Skip(start).Take(quantity).ToList();   
+         products=context.Products.Skip(start).Take(quantity).ToList();
+         
         }
        return products;
     }
 
     public async Task<List<Product>> GetMostRecentAsync(int start, int quantity)
     {
-        throw new NotImplementedException();
+        List<Product> products = new List<Product>();
+        await using (var context = new StoreDbContext())
+        {
+            products = context.Products.
+                OrderByDescending(e => e.InsertionDate).
+                Skip(start).Take(quantity).
+                ToList();
+        }
+
+        return products;
     }
 
     public async Task<List<Product>> GetBestSellerAsync(int start, int quantity)
@@ -24,7 +34,9 @@ public class DataProvider:IDataProvider
         List<Product> products = new List<Product>();
         await using (var context = new StoreDbContext())
         {
-            products=context.Products.OrderByDescending(e=>e.Sold).Skip(start).Take(quantity).ToList();   
+            products=context.Products.
+                OrderByDescending(e=>e.Sold).
+                Skip(start).Take(quantity).ToList();   
         }
         return products;
     }
@@ -34,7 +46,9 @@ public class DataProvider:IDataProvider
         List<Product> products = new List<Product>();
         await using (var context = new StoreDbContext())
         {
-            products=context.Products.Where(e =>  e.Category.Name == category).Skip(start).Take(quantity).ToList();   
+            products=context.Products.
+                Where(e =>  e.Category.Name == category).
+                Skip(start).Take(quantity).ToList();   
         }
         return products;
     }

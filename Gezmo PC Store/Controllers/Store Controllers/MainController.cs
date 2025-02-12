@@ -10,7 +10,13 @@ public class MainController:BaseController
     public MainController(IGlobalsHelper globalsHelper,IDataProvider dataProvider) : base(globalsHelper,dataProvider) { }
     public IActionResult Main()
     {
-          
-        return View(new MainModel());
+        MainModel mainModel = new MainModel
+        {
+            AllProducts = _dataProvider.GetProductsAsync(0, 8).Result,
+            BestSeller = _dataProvider.GetBestSellerAsync(0, 4).Result,
+            MostRecent = _dataProvider.GetMostRecentAsync(0, 4).Result
+        };
+
+        return View(mainModel);
     }
 }

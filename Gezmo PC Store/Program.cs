@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Gezmo_PC_Store.DataBaseModels;
 using Gezmo_PC_Store.Services;
 using Microsoft.EntityFrameworkCore;
@@ -36,4 +37,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
- 
