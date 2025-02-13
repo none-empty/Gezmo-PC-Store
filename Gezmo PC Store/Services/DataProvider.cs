@@ -52,4 +52,15 @@ public class DataProvider:IDataProvider
         }
         return products;
     }
+
+    public async Task<Product> GetByIdAsync(int ID)
+    {
+        Product product = new Product();
+        await using (var context = new StoreDbContext())
+        {
+            product=context.Products.SingleOrDefault(e=>e.ProductId == ID);
+        }
+
+        return product;
+    }
 }
