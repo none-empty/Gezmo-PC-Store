@@ -94,7 +94,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                 @foreach(var prod in @Model.BestSeller)
+                 @foreach(var prod in Model.BestSeller)
                  {
                      <div class="col mb-5">
                          <div class="card h-100">
@@ -111,7 +111,7 @@
                              </div>
                              <!-- Product actions-->
                              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Product Details</a></div>
+                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="ProductDetailsPage" asp-action="ProductDetails" asp-route-product_id="@prod.ProductId">Product Details</a></div>
                              </div>
                          </div>
                      </div>
@@ -123,7 +123,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    @foreach(var prod in @Model.AllProducts)
+                    @foreach(var prod in Model.AllProducts)
                     {
                         <div class="col mb-5">
                             <div class="card h-100">
@@ -140,7 +140,7 @@
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Product Details</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="ProductDetailsPage" asp-action="ProductDetails" asp-route-product_id="@prod.ProductId">Product Details</a></div>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    @foreach(var prod in @Model.AllProducts)
+                    @foreach(var prod in Model.AllProducts)
                     {
                         <div class="col mb-5">
                             <div class="card h-100">
@@ -169,7 +169,7 @@
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Product Details</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="ProductDetailsPage" asp-action="ProductDetails" asp-route-product_id="@prod.ProductId">Product Details</a></div>
                                 </div>
                             </div>
                         </div>
