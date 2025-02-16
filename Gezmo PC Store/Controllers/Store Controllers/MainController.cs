@@ -10,6 +10,7 @@ public class MainController:BaseController
     public MainController(IGlobalsHelper globalsHelper,IDataProvider dataProvider) : base(globalsHelper,dataProvider) { }
     public IActionResult Main()
     {
+     
         MainModel mainModel = new MainModel
         {
             AllProducts = _dataProvider.GetProductsAsync(0, 8).Result,

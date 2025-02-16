@@ -1,5 +1,5 @@
 ﻿namespace Gezmo_PC_Store.Models;
-
+ 
 public class GlobalModels
 {
     public Cart cart { get; set; } = new();

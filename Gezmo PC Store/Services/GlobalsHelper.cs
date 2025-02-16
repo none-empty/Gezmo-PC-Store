@@ -14,4 +14,9 @@ public class GlobalsHelper:IGlobalsHelper
         }
         return null;
     }
+
+    public void SetGlobals(HttpContext httpContext, GlobalModels globals)
+    {
+        httpContext.Session.SetString("Globals", JsonSerializer.Serialize(globals));
+    }
 }

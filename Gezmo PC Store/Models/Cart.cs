@@ -6,9 +6,7 @@ public class Cart
 
     public double Total()
     {
-        double total = 0;
-        foreach (var cart_item in Items) total += cart_item.get_total();
-        return total;
+       return Items.Sum(e => e.get_total());
     }
-    public bool IsEmpty()=> Items == null || Items.Count == 0;
+    public bool IsEmpty()=> Items.Count == 0;
 }

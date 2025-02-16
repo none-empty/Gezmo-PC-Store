@@ -11,6 +11,7 @@
     <title>title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/ProductDetails.css">
+  <script src="~/js/ProductDetails.js"></script>
 </head>
 <body>
 <div class="wwh">
@@ -27,7 +28,7 @@
             <h2 class="mb-3">@Model.Prod.Name</h2>
             
             <div class="mb-3">
-                <span class="h4 me-2">@Model.Prod.Price</span>
+                <span class="h4 me-2">@Model.Prod.Price $</span>
                 
             </div>
             <div class="mb-3">
@@ -44,7 +45,8 @@
                 <label for="quantity" class="form-label">Quantity:</label>
                 <input type="number" class="form-control" id="quantity" value="1" min="1" max="@Model.Prod.Stock" style="width: 80px;">
             </div>
-            <button class="btn btn-primary btn-lg mb-3 me-2">
+            <button class="btn btn-primary btn-lg mb-3 me-2 add-to-cart-button"
+                    data-item-id=@Model.Prod.ProductId data-quantity-input-id="quantity">
                 <i class="bi bi-cart-plus"></i> Add to Cart
             </button>
             <button class="btn btn-outline-secondary btn-lg mb-3">
@@ -55,14 +57,8 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function changeImage(event, src) {
-        document.getElementById('mainImage').src = src;
-        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
-        event.target.classList.add('active');
-    }
-</script>
+
+
  </div>
 </body>
 </html>

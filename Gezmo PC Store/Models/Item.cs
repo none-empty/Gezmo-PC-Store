@@ -2,11 +2,8 @@
 
 public class Item
 {
-    public int ProductID;
-    public string ProductName;
-    public string Description;
-    public double Price;
-    public int Stock;
-    public string Category;
-    public string ImageUrl;
+    public int ProductID { get; set; }=-1;
+    public string ProductName { get; set; }=string.Empty;
+    public decimal Price { get; set; }=0;
+    public string ImageUrl { get; set; }=string.Empty;
 }

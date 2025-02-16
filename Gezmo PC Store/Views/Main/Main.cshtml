@@ -55,12 +55,7 @@
                                 </span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
-                                @{
-                                    foreach (var cart_item in Globals.cart.Items)
-                                    {
-                                        <li><a class="dropdown-item" href="#">@cart_item.item.ProductName           @cart_item.quantity</a></li>
-                                    }  
-                                }
+                               
                                 @{
                                     if (Globals.cart.IsEmpty())
                                     {
@@ -68,6 +63,10 @@
                                     }
                                     else
                                     {
+                                        foreach (var cart_item in Globals.cart.Items)
+                                        {
+                                            <li><a class="dropdown-item" href="#">@cart_item.item.ProductName           @cart_item.quantity</a></li>
+                                        }  
                                         <li><hr class="dropdown-divider" /></li>
                                         <li><a class="dropdown-item" href="#">see order details</a></li>
                                     }

@@ -21,7 +21,8 @@ public class HomeController : BaseController
     }
     public IActionResult Index()
     {
-        GlobalModels Globals=InitializeGlobals();
+        GlobalModels Globals=ViewData["Globals"] as GlobalModels?? InitializeGlobals();
+        
         HttpContext.Session.SetString("Globals",JsonSerializer.Serialize(Globals));
         return RedirectToAction("Main","Main");
     }

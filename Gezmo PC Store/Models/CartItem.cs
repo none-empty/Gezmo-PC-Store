@@ -2,7 +2,7 @@
 
 public class CartItem
 {
-    public Item item = new Item();
-    public int quantity=0;
-    public double get_total() => item.Price * quantity;
+    public Item item { get; set; } = new Item();
+    public int quantity{ get; set; }=0;
+    public double get_total() => (double)item.Price * quantity;
 }

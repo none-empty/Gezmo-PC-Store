@@ -5,7 +5,7 @@ namespace Gezmo_PC_Store.Controllers;
 
 public class BaseController:Controller
 {
-    private readonly IGlobalsHelper _globalsHelper;
+    protected readonly IGlobalsHelper _globalsHelper;
     protected readonly IDataProvider _dataProvider;
     protected const int PAGESIZE = 50;
     public BaseController(IGlobalsHelper globalsHelper, IDataProvider dataProvider)
