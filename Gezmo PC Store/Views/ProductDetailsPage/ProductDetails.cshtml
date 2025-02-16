@@ -3,62 +3,118 @@
 @{
     Layout ="_Layout";
 }
-
+@{
+    var Globals = ViewData["Globals"] as GlobalModels;
+}
 <!DOCTYPE html>
 
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/ProductDetails.css">
-  <script src="~/js/ProductDetails.js"></script>
+    
+    <script src="~/js/ProductDetails.js"></script>
 </head>
 <body>
-<div class="wwh">
-<div class="container mt-5">
-    <div class="row">
-        <!-- Product Images -->
-        <div class="col-md-6 mb-4">
-            <img src="/desktop-wallpaper-pc-hardware-pc-hardware-thumbnail.jpg" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
-         
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
 
-        <!-- Product Details -->
-        <div class="col-md-6">
-            <h2 class="mb-3">@Model.Prod.Name</h2>
-            
-            <div class="mb-3">
-                <span class="h4 me-2">@Model.Prod.Price $</span>
-                
-            </div>
-            <div class="mb-3">
-              
-                <span class="ms-2">Sold: @Model.Prod.Sold</span>
-            </div>
-            <div class="mb-3">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
 
-                <span class="ms-2">Stock: @Model.Prod.Stock</span>
+            <div class="dropdown">
+                <form class="d-flex">
+                    <button
+                        class="btn btn-outline-dark dropdown-toggle"
+                        type="button"
+                        id="cartDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                    @Globals.cart.Total()
+                                </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
+
+                        @{
+                            if (Globals.cart.IsEmpty())
+                            {
+                                <li style="padding: 9px">No Items currently</li>
+                            }
+                            else
+                            {
+                                foreach (var cart_item in Globals.cart.Items)
+                                {
+                                    <li><a class="dropdown-item" href="#">@cart_item.item.ProductName           @cart_item.quantity</a></li>
+                                }
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#">see order details</a></li>
+                            }
+                        }
+
+                    </ul>
+                </form>
             </div>
-            <p class="mb-4"> @Model.Prod.Description</p>
-         
-            <div class="mb-4">
-                <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" class="form-control" id="quantity" value="1" min="1" max="@Model.Prod.Stock" style="width: 80px;">
-            </div>
-            <button class="btn btn-primary btn-lg mb-3 me-2 add-to-cart-button"
-                    data-item-id=@Model.Prod.ProductId data-quantity-input-id="quantity">
-                <i class="bi bi-cart-plus"></i> Add to Cart
-            </button>
-            <button class="btn btn-outline-secondary btn-lg mb-3">
-                <i class="bi bi-heart"></i> Add to Wishlist
-            </button>
-        
+
+
         </div>
     </div>
+</nav>
+<div class="wwh">
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Product Images -->
+            <div class="col-md-6 mb-4">
+                <img src="/desktop-wallpaper-pc-hardware-pc-hardware-thumbnail.jpg" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <h2 class="mb-3">@Model.Prod.Name</h2>
+
+                <div class="mb-3">
+                    <span class="h4 me-2">@Model.Prod.Price $</span>
+
+                </div>
+                <div class="mb-3">
+
+                    <span class="ms-2">Sold: @Model.Prod.Sold</span>
+                </div>
+                <div class="mb-3">
+
+                    <span class="ms-2">Stock: @Model.Prod.Stock</span>
+                </div>
+                <p class="mb-4"> @Model.Prod.Description</p>
+
+                <div class="mb-4">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" value="1" min="1" max="@Model.Prod.Stock" style="width: 80px;">
+                </div>
+                <button class="btn btn-primary btn-lg mb-3 me-2 add-to-cart-button"
+                        data-item-id=@Model.Prod.ProductId data-quantity-input-id="quantity">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                </button>
+                <button class="btn btn-outline-secondary btn-lg mb-3">
+                    <i class="bi bi-heart"></i> Add to Wishlist
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
-
-
-
- </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
