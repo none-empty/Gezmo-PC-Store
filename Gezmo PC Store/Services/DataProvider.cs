@@ -1,4 +1,5 @@
 ﻿using Gezmo_PC_Store.DataBaseModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gezmo_PC_Store.Services;
 
@@ -48,7 +49,7 @@ public class DataProvider:IDataProvider
         {
             products=context.Products.
                 Where(e =>  e.Category.Name == category).
-                Skip(start).Take(quantity).ToList();   
+                Skip(start).Take(quantity).ToList();
         }
         return products;
     }
@@ -58,7 +59,7 @@ public class DataProvider:IDataProvider
         Product product = new Product();
         await using (var context = new StoreDbContext())
         {
-            product=context.Products.SingleOrDefault(e=>e.ProductId == ID);
+            product=context.Products.SingleOrDefault(e=>e.ProductId == ID)!;
         }
 
         return product;
