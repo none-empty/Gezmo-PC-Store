@@ -112,7 +112,7 @@
         @{
             for(int pg=Model.PageFromLeft;pg < Model.PageFromRight;++pg)
             {
-                <li class="page-item"><a class="page-link" asp-controller="ProductsPage" asp-action="ProductsPage" asp-route-page=@pg asp-route-type=@Model.Type>@pg</a></li>
+                <li class="page-item"><a class="page-link" asp-controller="ProductsPage" asp-action="ProductsPage" asp-route-page=@pg asp-route-pageFromLeft=@Model.PageFromLeft asp-route-type=@Model.Type>@pg</a></li>
             }
         }
       <li class="page-item">

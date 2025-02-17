@@ -7,7 +7,7 @@ public class BaseController:Controller
 {
     protected readonly IGlobalsHelper _globalsHelper;
     protected readonly IDataProvider _dataProvider;
-    protected const int PAGESIZE = 25;
+    protected const int PAGESIZE = 24;
     public BaseController(IGlobalsHelper globalsHelper, IDataProvider dataProvider)
     {
         _globalsHelper = globalsHelper;

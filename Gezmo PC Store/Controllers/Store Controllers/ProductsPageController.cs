@@ -9,6 +9,8 @@ public class ProductsPageController:BaseController
 {
     private readonly Dictionary<string, Func<int, int,Task<List<Product>>>> TYPES;
     private readonly int PAGINATION_LENGTH=10;
+    private readonly int CHANGELIMIT=2;
+    private readonly int CHANGEVALUE=2;
     public ProductsPageController(IGlobalsHelper globalsHelper, IDataProvider dataProvider) : base(globalsHelper, dataProvider)
     {
         TYPES = new Dictionary<string, Func<int, int,Task<List<Product>>>>()
@@ -19,13 +21,36 @@ public class ProductsPageController:BaseController
         };
     }
 
-    public IActionResult ProductsPage(string type,int page = 1,string category=null)
+    public IActionResult ProductsPage(string type,int page = 1,int pageFromLeft=1,string? category=null)
     {
         --page;
         List<Product>products = type.Equals("Category")?
-            _dataProvider.GetByCategoryAsync(page*PAGESIZE,PAGESIZE,category).Result:
-            TYPES[type](page,PAGESIZE).Result;
+            _dataProvider.GetByCategoryAsync(page*PAGESIZE,PAGESIZE,category!).Result:
+            TYPES[type](page*PAGESIZE,PAGESIZE).Result;
         
-        return View(new ProductsPageModel{Products=products,PageSize = PAGESIZE,Type = type,PaginationLength = PAGINATION_LENGTH });
+        pageFromLeft=PaginationScopeShouldChange(page, pageFromLeft);
+        ProductsPageModel model = new ProductsPageModel
+        {
+            Products = products,
+            PageSize = PAGESIZE, Type = category is null ? type : category,
+            PaginationLength = PAGINATION_LENGTH,
+            PageFromLeft = pageFromLeft
+        };
+        model.PageFromRight =pageFromLeft + (products.Count < PAGESIZE ? products.Count/PAGESIZE+ (products.Count/PAGESIZE != 0?1:0) :PAGINATION_LENGTH);
+        return View(model);
+    }
+    public int PaginationScopeShouldChange(int currentPage,int pageFromLeft)
+    {
+        if (PaginationScopeShouldIncrease(currentPage, pageFromLeft)) return pageFromLeft + CHANGEVALUE;
+        if(PaginationScopeShouldDecrease(currentPage, pageFromLeft)) return pageFromLeft-CHANGEVALUE;
+        return pageFromLeft;
+    }
+    public bool PaginationScopeShouldIncrease(int currentPage,int pageFromLeft)
+    {
+        return pageFromLeft + PAGINATION_LENGTH - currentPage - 1 <= CHANGELIMIT;
+    }
+    public bool PaginationScopeShouldDecrease(int currentPage,int pageFromLeft)
+    {
+        return pageFromLeft-CHANGEVALUE>0 && currentPage-pageFromLeft<=CHANGELIMIT;
     }
 }

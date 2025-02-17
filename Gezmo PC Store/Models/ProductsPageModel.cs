@@ -9,5 +9,5 @@ public class ProductsPageModel
     public string Type { get; set; } = null!;
     public int PageFromLeft { get; set; } = 1;
     public int PaginationLength { get; set; } = 10;
-    public int PageFromRight => PageFromLeft+PaginationLength;
+    public int PageFromRight { get; set; }
 }
