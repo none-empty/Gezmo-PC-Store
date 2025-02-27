@@ -21,23 +21,43 @@ public class ProductsPageController:BaseController
         };
     }
 
-    public IActionResult ProductsPage(string type,int page = 1,int pageFromLeft=1,string? category=null)
+    public async Task<IActionResult> ProductsPage(string type,int page = 1,int pageFromLeft=1,string? category=null)
     {
-        --page;
+        int len = await _dataProvider.GetProductsCountAsync(type, category);
+        int maxPage = len /PAGESIZE +(len % PAGESIZE== 0 ? 0 : 1);
+        Validate_Page(ref page, maxPage);
+         
         List<Product>products = type.Equals("Category")?
-            _dataProvider.GetByCategoryAsync(page*PAGESIZE,PAGESIZE,category!).Result:
-            TYPES[type](page*PAGESIZE,PAGESIZE).Result;
-        
+            await _dataProvider.GetByCategoryAsync( (page-1)*PAGESIZE,PAGESIZE,category!) :
+            await TYPES[type]((page-1)*PAGESIZE,PAGESIZE);
+
         pageFromLeft=PaginationScopeShouldChange(page, pageFromLeft);
+        
         ProductsPageModel model = new ProductsPageModel
         {
             Products = products,
             PageSize = PAGESIZE, Type = category is null ? type : category,
             PaginationLength = PAGINATION_LENGTH,
-            PageFromLeft = pageFromLeft
+            PageFromLeft = pageFromLeft,
+            CurrentPage = page,
+            Category = category
         };
-        model.PageFromRight =pageFromLeft + (products.Count < PAGESIZE ? products.Count/PAGESIZE+ (products.Count/PAGESIZE != 0?1:0) :PAGINATION_LENGTH);
+      
+        model.PageFromRight = int.Min(pageFromLeft+PAGINATION_LENGTH,maxPage);
         return View(model);
+    }
+
+    public void Validate_Page(ref int page, int maxPage)
+    {
+        if (page > maxPage)
+        {
+            page = maxPage;
+        }
+        if(page <1)
+        {
+            page = 1;
+        }
+       
     }
     public int PaginationScopeShouldChange(int currentPage,int pageFromLeft)
     {
@@ -51,6 +71,6 @@ public class ProductsPageController:BaseController
     }
     public bool PaginationScopeShouldDecrease(int currentPage,int pageFromLeft)
     {
-        return pageFromLeft-CHANGEVALUE>0 && currentPage-pageFromLeft<=CHANGELIMIT;
+        return pageFromLeft-CHANGEVALUE > 0 && currentPage-pageFromLeft<=CHANGELIMIT;
     }
 }
