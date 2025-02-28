@@ -21,4 +21,8 @@
       <PackageReference Include="popper.js" Version="1.16.1" />
     </ItemGroup>
     
+    <ItemGroup>
+      <None Include="wwwroot\css\_Main-ProductPage_Layout.css" />
+    </ItemGroup>
+    
 </Project>

@@ -1,7 +1,7 @@
 ﻿ @model Gezmo_PC_Store.Models.ProductsPageModel
 
 @{
-    Layout ="_Layout";
+    Layout ="_Main-ProductPage_Layout";
 }
 @{
     var Globals = ViewData["Globals"] as GlobalModels;
@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>title</title>
+    
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -74,6 +75,7 @@
         </div>
     </div>
 </nav>
+ 
 <div class ="ss" style="background-color:orange; margin-top:100px; padding: 20px"><h1 style="color:whitesmoke">@Model.Type</h1></div>
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
