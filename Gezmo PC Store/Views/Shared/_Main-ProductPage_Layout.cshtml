@@ -1,12 +1,14 @@
-﻿ 
+﻿@using Gezmo_PC_Store.Services
  
-
 @{
     Layout = "_Layout";
 }
-
+@inject IDataProvider CategoryService
+@{
+    var _categories = await CategoryService.GetCategoriesAsync();
+}
 <!DOCTYPE html>
-
+ 
 <html>
 <head>
     <title></title>
@@ -15,10 +17,14 @@
 <body>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    @{
+        foreach (var cat in _categories )
+        {
+            <a asp-controller="ProductsPage" asp-action="ProductsPage" asp-route-type="category" asp-route-category_num=@cat.CategoryId >@cat.Name</a>   
+        }
+    }
+  
+    
 </div>
 <span id="menuButton" style="font-size:30px;cursor:pointer;background-color: white;" onclick="openNav()">&#9776;  </span>
 

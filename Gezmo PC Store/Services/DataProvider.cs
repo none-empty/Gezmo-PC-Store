@@ -31,10 +31,10 @@ public class DataProvider:IDataProvider
                 Skip(start).Take(quantity).ToListAsync();
     }
 
-    public async Task<List<Product>> GetByCategoryAsync(int start, int quantity, string category)
+    public async Task<List<Product>> GetByCategoryAsync(int start, int quantity, int category_num)
     {
         return await _context.Products.
-                Where(e =>  e.Category.Name == category).
+                Where(e =>  e.Category.CategoryId == category_num).
                 Skip(start).Take(quantity).ToListAsync();
     }
 
@@ -43,13 +43,18 @@ public class DataProvider:IDataProvider
         return await _context.Products.SingleOrDefaultAsync(e=>e.ProductId == id);
     }
 
-    public async Task<int> GetProductsCountAsync(string type,string? category=null)
+    public async Task<int> GetProductsCountAsync(string type,int category_num=-1)
     {
         if(type.ToLower().Equals("allproducts"))
           return await _context.Products.CountAsync();
         if(type.ToLower().Equals("category")) 
             return await _context.Products.
-                Where(e => e.Category.Name == category).CountAsync();
+                Where(e => e.Category.CategoryId == category_num).CountAsync();
         return QUANTITY_LIMIT;
+    }
+
+    public async Task<List<Category>> GetCategoriesAsync()
+    {
+        return await _context.Categories.ToListAsync();
     }
 }

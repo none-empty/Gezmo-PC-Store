@@ -21,14 +21,14 @@ public class ProductsPageController:BaseController
         };
     }
 
-    public async Task<IActionResult> ProductsPage(string type,int page = 1,int pageFromLeft=1,string? category=null)
+    public async Task<IActionResult> ProductsPage(string type,int page = 1,int pageFromLeft=1,int category_num=-1)
     {
-        int len = await _dataProvider.GetProductsCountAsync(type, category);
+        int len = await _dataProvider.GetProductsCountAsync(type, category_num);
         int maxPage = len /PAGESIZE +(len % PAGESIZE== 0 ? 0 : 1);
         Validate_Page(ref page, maxPage);
          
-        List<Product>products = type.Equals("Category")?
-            await _dataProvider.GetByCategoryAsync( (page-1)*PAGESIZE,PAGESIZE,category!) :
+        List<Product>products = type.Equals("category")?
+            await _dataProvider.GetByCategoryAsync( (page-1)*PAGESIZE,PAGESIZE,category_num) :
             await TYPES[type]((page-1)*PAGESIZE,PAGESIZE);
 
         pageFromLeft=PaginationScopeShouldChange(page, pageFromLeft);
@@ -36,11 +36,11 @@ public class ProductsPageController:BaseController
         ProductsPageModel model = new ProductsPageModel
         {
             Products = products,
-            PageSize = PAGESIZE, Type = category is null ? type : category,
+            PageSize = PAGESIZE, Type = (type.Equals("category")) ? type :"category",
             PaginationLength = PAGINATION_LENGTH,
             PageFromLeft = pageFromLeft,
             CurrentPage = page,
-            Category = category
+            Category = category_num
         };
       
         model.PageFromRight = int.Min(pageFromLeft+PAGINATION_LENGTH,maxPage);
