@@ -1,6 +1,8 @@
-﻿namespace Gezmo_PC_Store.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class UserProfile
+namespace Gezmo_PC_Store.Models;
+
+public class UserProfile  
 {
     private int UserId { get; set; }
     public string Username { get; set; }

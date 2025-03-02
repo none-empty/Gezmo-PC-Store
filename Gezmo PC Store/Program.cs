@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Gezmo_PC_Store.DataBaseModels;
 using Gezmo_PC_Store.Services;
+ 
 using Microsoft.EntityFrameworkCore;
  
 
@@ -12,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddDbContext<StoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<IdentityDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -38,10 +43,10 @@ app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-
+ 
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
