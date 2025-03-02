@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>title</title>
+    <title>@Model.Type</title>
     
 </head>
 <body>
@@ -76,7 +76,17 @@
     </div>
 </nav>
  
-<div class ="ss" style="background-color:orange; margin-top:100px; padding: 20px"><h1 style="color:whitesmoke">@Model.Type</h1></div>
+<div class ="ss" style="background-color:orange; margin-top:100px; padding: 20px">
+    @{
+        if (!Model.Type.Equals("category"))
+        {
+            <h1 style="color:whitesmoke">Model.Type</h1>
+        }
+        else {
+            <h1 style = "color:whitesmoke" ></h1>
+        }
+    }
+</div>
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

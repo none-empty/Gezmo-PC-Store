@@ -28,25 +28,35 @@
                                 <p class="small text-muted mb-1">Date</p>
                                 <p>@DateTime.Now.ToString()</p>
                             </div>
-                            <div class="col mb-3">
-                                <p class="small text-muted mb-1">Order No.</p>
-                                <p>012j1gvs356c</p>
-                            </div>
+                           
                         </div>
 
                         <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
                             @{
                                 foreach (var prod in cart.Items)
                                 {
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
+                                    <div class="row align-items-center">
+                                        <!-- Product Name -->
+                                        <div class="col-md-8 col-lg-6">
                                             <p>@prod.item.ProductName</p>
                                         </div>
-                                       
+
+                                        <!-- Total Price -->
                                         <div class="col-md-4 col-lg-3">
                                             <p>@prod.get_total()</p>
                                         </div>
+
+                                        <!-- Quantity Controls -->
+                                        <div class="col-md-4 col-lg-3 d-flex justify-content-end align-items-center">
+                                            <button class="btn btn-outline-secondary btn-sm px-1 py-0" onclick="decreaseQuantity(this)" style="font-size: 0.8rem; height: 25px;">-</button>
+                                            <div class="mx-1" style="width: 40px; height: 25px; display: flex; align-items: center; justify-content: center; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
+                                               @prod.quantity
+                                            </div>
+                                            <button class="btn btn-outline-secondary btn-sm px-1 py-0" onclick="increaseQuantity(this)" style="font-size: 0.8rem; height: 25px;">+</button>
+                                        </div>
                                     </div>
+
+
                                 }
                             }
                             <div class="row">
@@ -72,7 +82,8 @@
 
                     </div>
                 </div>
-                <button class="btn btn-primary btn-lg mb-3 me-2 ">
+                
+                <button class="btn btn-primary btn-lg mb-3 me-2 " style="margin-top: 30px">
                     <i class="bi">Confirm Order</i>  
                 </button>
             </div>
