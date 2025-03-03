@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Gezmo_PC_Store.DataBaseModels;
 using Gezmo_PC_Store.Services;
- 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
  
 
@@ -16,7 +16,7 @@ builder.Services.AddDbContext<StoreDbContext>(options =>
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

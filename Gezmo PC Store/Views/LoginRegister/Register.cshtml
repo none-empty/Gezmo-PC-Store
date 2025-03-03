@@ -1,4 +1,4 @@
-﻿
+﻿@model Gezmo_PC_Store.Models.RegisterUser
 @{
     Layout = "_Layout";
 }
@@ -30,7 +30,7 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-
+                        <form asp-controller="LoginRegister" asp-action="ValidateInsertNewUser">
                         <div class="mb-md-5 mt-md-4 pb-5">
 
                             <h2 class="fw-bold mb-2  ">Sign Up</h2>
@@ -41,6 +41,7 @@
                                     id="username"
                                     class="form-control form-control-lg"
                                     required
+                                    asp-for=@Model.UserName
                                 />
                                 <label class="form-label" for="username">Username</label>
                             </div>
@@ -50,6 +51,7 @@
                                     id="typeEmailX"
                                     class="form-control form-control-lg"
                                     required
+                                    asp-for= @Model.Email
                                 />
                                 <label class="form-label" for="typeEmailX">Email</label>
                             </div>
@@ -60,10 +62,20 @@
                                     id="typePasswordX"
                                     class="form-control form-control-lg"
                                     required
+                                    asp-for=@Model.Password
                                 />
                                 <label class="form-label" for="typePasswordX">Password</label>
                             </div>
-
+                            <div class="form-outline mb-4">
+                                <input
+                                    type="password"
+                                    id="typePasswordX"
+                                    class="form-control form-control-lg"
+                                    required
+                                    asp-for= @Model.ConfirmPassword
+                                />
+                                <label class="form-label" for="typePasswordX">ConfirmPassword</label>
+                            </div>
 
 
 
@@ -72,7 +84,7 @@
 
 
                         </div>
-
+                        </form>
                         <div>
                             <p class="mb-0">You already have an account? <a asp-area="" asp-controller="LoginRegister" asp-action="Login" class="text-white-50 fw-bold">Login</a>
                             </p>
