@@ -16,7 +16,7 @@ builder.Services.AddDbContext<StoreDbContext>(options =>
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -25,9 +25,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IGlobalsHelper,GlobalsHelper>();
 builder.Services.AddScoped<IDataProvider, DataProvider>();
- 
+builder.Services.AddScoped<IUserInfo, UserInfo>();
 var app = builder.Build();
 
 
