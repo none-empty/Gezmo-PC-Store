@@ -23,12 +23,14 @@ public class UserInfo:IUserInfo
         return ! await _context.Users.AnyAsync(x => x.UserName == username);
     }
 
-    public async void insertUserAsync(User user)
+    public async void InsertUserAsync(User user)
     {
-       
-            _context.Users.Add(user);
-        
-     
+        _context.Users.Add(user);
         _context.SaveChanges();
+    }
+
+    public async Task<User?> GetUserByEmail(string email)
+    {
+        return await _context.Users.FirstOrDefaultAsync(x => x.Email.Equals(email));
     }
 }

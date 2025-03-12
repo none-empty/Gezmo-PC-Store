@@ -6,5 +6,6 @@ public interface IUserInfo
 {
  public Task<bool> CheckIfEmailUnique(string email);
  public Task<bool> CheckIfUsernameUnique(string username);
- public void insertUserAsync(User user);
+ public void InsertUserAsync(User user);
+ public Task<User?> GetUserByEmail(string email);
 }

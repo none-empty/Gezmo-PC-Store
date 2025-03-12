@@ -1,4 +1,4 @@
-﻿ 
+﻿ @model Gezmo_PC_Store.Models.LoginUser
 @{
     Layout = "_Layout";
 }
@@ -30,20 +30,22 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-
+                        <form asp-controller="LoginRegister" asp-action="Login">
                         <div class="mb-md-5 mt-md-4 pb-5">
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                             <p class="text-white-50 mb-5">Please enter your login and password!</p>
-
+                            
                             <div class="form-outline mb-4">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                                 <input
                                     type="email"
                                     id="typeEmailX"
                                     class="form-control form-control-lg"
-                                    required
-                                />
+                                    asp-for="@Model.Email"
+                                    required/>
                                 <label class="form-label" for="typeEmailX">Email</label>
+                                
                             </div>
 
                             <div class="form-outline mb-4">
@@ -52,6 +54,7 @@
                                     id="typePasswordX"
                                     class="form-control form-control-lg"
                                     required
+                                    asp-for="Password"
                                 />
                                 <label class="form-label" for="typePasswordX">Password</label>
                             </div>
@@ -64,7 +67,7 @@
                              
 
                         </div>
-
+                            </form>
                         <div>
                             <p class="mb-0">Don't have an account? <a asp-area="" asp-controller="LoginRegister" asp-action="Register" class="text-white-50 fw-bold">Sign Up</a>
                             </p>
@@ -78,4 +81,7 @@
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 </body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 </html>
