@@ -10,16 +10,18 @@ namespace Gezmo_PC_Store.Controllers.Store_Controllers;
 public class LoginRegisterController:BaseController
 {
     private readonly IUserInfo _userInfo;
-    private readonly IPasswordHasher<User> _passwordHasher;
-    private int counter = 2;
+    private readonly IPasswordHasher _passwordHasher;
+    private readonly NextUserID _nextUserID;
+    
     public LoginRegisterController(IGlobalsHelper globalsHelper,
         IDataProvider dataProvider
         ,IUserInfo userInfo,
-        IPasswordHasher<User>passwordHasher) : base(globalsHelper,
+        IPasswordHasher passwordHasher,NextUserID nextUserId) : base(globalsHelper,
         dataProvider)
     {
        _userInfo = userInfo; 
        _passwordHasher = passwordHasher;
+       _nextUserID = nextUserId;
     }
     public IActionResult Login()
     {
@@ -29,7 +31,7 @@ public class LoginRegisterController:BaseController
     public async Task<IActionResult> Login(LoginUser loginUser)
     {
         var user= await _userInfo.GetUserByEmail(loginUser.Email);
-        var hp = _passwordHasher.HashPassword(null, loginUser.Password);
+        var hp = _passwordHasher.HashPassword(loginUser.Password);
         if (user is null || !(user.PasswordHash.Equals(hp)))
         {
             ModelState.AddModelError("Email", "Invalid email or password");
@@ -53,8 +55,8 @@ public class LoginRegisterController:BaseController
         {
             return View(user);
         }
-        var record=new User{UserId = counter++,UserName = user.UserName,Email = user.Email,Role = "user"};
-         record.PasswordHash = _passwordHasher.HashPassword(null,user.Password);
+        var record=new User{UserId = _nextUserID.GetNextUserId(),UserName = user.UserName,Email = user.Email,Role = "user"};
+         record.PasswordHash = _passwordHasher.HashPassword(user.Password);
          _userInfo.InsertUserAsync(record);
          sign_in(record);
          return RedirectToAction("Main", "Main");

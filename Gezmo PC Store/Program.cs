@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Gezmo_PC_Store.DataBaseModels;
 using Gezmo_PC_Store.Services;
-using Microsoft.AspNetCore.Identity;
+ 
 using Microsoft.EntityFrameworkCore;
  
 
@@ -25,7 +25,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddSingleton<NextUserID>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IGlobalsHelper,GlobalsHelper>();
 builder.Services.AddScoped<IDataProvider, DataProvider>();
 builder.Services.AddScoped<IUserInfo, UserInfo>();
