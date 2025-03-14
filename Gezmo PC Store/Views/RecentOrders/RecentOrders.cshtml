@@ -1,0 +1,83 @@
+﻿@model Gezmo_PC_Store.Models.RecentOrdersModel
+
+@{
+    Layout = "_Layout";
+}
+@{
+    var glb = ViewData["Globals"] as GlobalModels;
+    var user = glb.User;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>RecentOrders</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/Profile.css" rel="stylesheet">
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="~/newuser.jpg" alt="">
+                    </a>
+                    <h1>@user.Username</h1>
+
+                </div>
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a asp-controller="Profile" asp-action="Profile"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="#"> <i class="fa fa-calendar"></i> Recent Orders <span class="label label-warning pull-right r-activity">9</span></a></li>
+                    <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile-info col-md-9">
+            <div class="container mt-5">
+                <h2 class="mb-4">Orders</h2>
+                @{
+                    if (Model.userOrders.Count == 0)
+                    {
+                        <div padding="100px"><h6>No Orders to view</h6></div>
+                    }
+                    else
+                    {
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var order in Model.userOrders)
+                        {
+                            <tr>
+                                <td>@order.OrderId</td>
+                                <td>@order.OrderDate</td>
+                                <td>@order.TotalPrice</td>
+                                <td><span class="badge bg-success">@order.Status</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">View Details</button>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                        </table>
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
