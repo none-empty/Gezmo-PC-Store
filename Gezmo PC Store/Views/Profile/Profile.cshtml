@@ -1,0 +1,56 @@
+﻿ 
+@{
+    Layout = "_Layout";
+}
+@{
+    var glb = ViewData["Globals"] as GlobalModels;
+    var user = glb.User;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/Profile.css" rel="stylesheet">
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="~/newuser.jpg" alt="">
+                    </a>
+                    <h1>@user.Username</h1>
+                     
+                </div>
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a asp-controller="Profile" asp-action="Profile"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li><a asp-controller="RecentOrders" asp-action="RecentOrders"> <i class="fa fa-calendar"></i> Recent Orders <span class="label label-warning pull-right r-activity">9</span></a></li>
+                    <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile-info col-md-9"> 
+            <div class="panel">
+              
+                <div class="panel-body bio-graph-info">
+                    
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><span>username</span>: @user.Username</p>
+                            <p><span>email</span>: @user.Email</p>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>
