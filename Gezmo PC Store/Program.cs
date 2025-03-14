@@ -26,6 +26,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddSingleton<NextUserID>();
+builder.Services.AddScoped<IOrdersHandler, OrdersHandler>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IGlobalsHelper,GlobalsHelper>();
 builder.Services.AddScoped<IDataProvider, DataProvider>();
