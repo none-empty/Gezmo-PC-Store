@@ -38,7 +38,7 @@
                       @{
                           if (Globals.LoggedIn)
                           {
-                              <a style="text-decoration: none" asp-area="" >@Globals.User.Username &nbsp &nbsp</a>
+                              <a style="text-decoration: none" asp-area="" asp-controller="Profile" asp-action="Profile">@Globals.User.Username &nbsp &nbsp</a>
                                
                               <a style = "text-decoration: none" asp-area = ""  asp-controller="LoginRegister" asp-action="Sign_Out"> sign out </a>
                           }
